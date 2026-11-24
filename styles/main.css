@@ -1,0 +1,337 @@
+/* custom property */
+:root {
+    --accent-color: #800000;
+    --gradient-color: #f6bb73;
+
+    --light_menu: white;
+    --mid_menu: antiquewhite;
+    --dark_menu: black;
+}
+
+/* reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* default styles */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: calc(15px + .2vw);
+    width: min(100%, 1024px);
+    line-height: 1.5;
+    margin: auto;
+    border: 2px solid var(--accent-color);
+}
+
+h1, h2, h3, p, ul {
+    padding: .25em 0;
+}
+
+a:hover, a:focus {
+    font-style: italic;
+    color: var(--accent-color);
+}
+
+h1 {
+    font-size: 150%;
+}
+
+h2 {
+    font-size: 130%;
+    color: var(--accent-color);
+}
+
+h3 {
+    font-size: 105%;
+}
+
+ul {
+    margin-left: 2em;
+}
+
+/* the styles for the header */
+header {
+    line-height: 1.2;
+    text-align: center;
+    border-bottom: 2px solid var(--accent-color);
+    background-image: linear-gradient(
+        30deg, var(--gradient-color) 0%, white 30%,
+        white 65%, var(--gradient-color) 100%);
+
+    & h2 {
+        font-size: 175%;
+        padding: .5em 0 0 0;
+    }
+
+    & h3 {
+        font-size: 130%;
+        font-style: italic;
+        padding-bottom: 1em;
+    }
+
+    & img {
+        display: none;
+    }
+}
+
+/* the styles for the main content */
+main {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0 1em 1em;
+
+    & blockquote {
+        font-style: italic;
+        padding-left: 1em;
+    }
+
+    & h3 + img {
+        width: clamp(40px, 50%, 75px);
+        border: 4px double var(--accent-color);
+        border-radius: 10px;
+    }
+}
+
+/* the styles for the section */
+section {
+    padding-left: .5em;
+    padding-bottom: 1em;
+    border-bottom: 2px solid var(--accent-color);
+
+    & img {
+        width: clamp(100px, 50%, 250px);
+        float: right;
+        margin: 0 1em .25em;
+    }
+}
+
+/* the styles for the aside */
+aside {
+    padding-right: .5em;
+}
+
+/* the styles for the footer */
+footer {
+    background-color: var(--accent-color);
+
+    & p {
+        text-align: center;
+        color: white;
+        padding: 1em 0;
+    }
+}
+
+/* CSS classes */
+.featured {
+    border-top: 2px solid var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+    padding: .5em 0 1em;
+}
+
+.speaker {
+    & h1 {
+        color: var(--accent-color);
+    }
+
+    & h2 {
+        color: black;
+    }
+
+    & p {
+        padding: .5em 0;
+    }
+}
+
+.large {
+    font-size: 125%;
+}
+
+/* navigation bar */
+.navbar {
+    clear: left;
+    position: relative;
+    background-color: var(--accent-color);
+
+    & a {
+        display: block;
+        padding: 1em;
+        text-decoration: none;
+        margin: 0 2px 2px 0;
+    }
+
+    & a:link, a:visited {
+        color: var(--light_menu);
+    }
+
+    & a:hover, a:focus, a.current {
+        background-color: var(--mid_menu);
+        color: var(--dark_menu);
+    }
+
+    & ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* hamburger menu */
+.menu-btn {
+    display: block;
+    padding: .5em 1em;
+    color: white;
+    font-size: 150%;
+    cursor: pointer;
+}
+
+.menu-btn::before {
+    content: "\2630";
+}
+
+/* hide checkbox */
+#menu-toggle {
+    display: none;
+}
+
+/* mobile navigation menu */
+.menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 40%;
+    background-color: var(--accent-color);
+    z-index: 10;
+}
+
+/* show menu when checkbox is checked */
+#menu-toggle:checked ~ .menu {
+    display: block;
+}
+
+/* change hamburger to X */
+#menu-toggle:checked + .menu-btn::before {
+    content: "\00D7";
+}
+
+/* submenu styles */
+.submenu {
+    position: relative;
+
+    & small {
+        margin-left: .25em;
+    }
+
+    & > a::after {
+        content: " \25B6";
+        font-size: 75%;
+    }
+}
+
+.dropdown {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 100%;
+    background-color: var(--accent-color);
+    color: var(--light_menu);
+    display: none;
+    z-index: 20;
+
+    & > li a {
+        margin: 2px;
+    }
+}
+
+/* show dropdown on hover */
+.submenu:hover > .dropdown,
+.submenu:focus-within > .dropdown {
+    display: block;
+}
+
+/* responsive header */
+@media only screen and (min-width: 600px) {
+
+    header {
+        text-align: left;
+
+        & img {
+            display: block;
+            width: clamp(40px, 15%, 80px);
+            float: left;
+            margin: .75em 1em;
+        }
+    }
+}
+
+/* responsive two-column layout */
+@media only screen and (min-width: 650px) {
+
+    main {
+        flex-direction: row;
+    }
+
+    section {
+        flex-basis: 75%;
+        border-bottom: none;
+    }
+
+    aside {
+        flex-basis: 25%;
+    }
+}
+
+/* desktop navigation menu */
+@media only screen and (min-width: 850px) {
+
+    .menu-btn {
+        display: none;
+    }
+
+    .menu,
+    #menu-toggle:checked ~ .menu {
+        display: flex;
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+    }
+
+    .menu > li {
+        flex-basis: 20%;
+        text-align: center;
+    }
+
+    .submenu {
+        position: relative;
+
+        & > a::after {
+            content: " \25BC";
+        }
+    }
+
+    .dropdown {
+        top: auto;
+        left: 0;
+        right: 0;
+        width: 100%;
+    }
+
+    .dropdown li {
+        flex-basis: 100%;
+    }
+
+    .navbar a {
+        margin: 0 1px 2px;
+    }
+
+    .menu > li:first-child a {
+        margin-left: 0;
+    }
+
+    .menu > li:last-child a {
+        margin-right: 0;
+    }
+}
